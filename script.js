@@ -42,25 +42,26 @@ console.log(myMap(array, (item) => {
     return item * 2;
 }))
 
-function myFind(arr, findNum, callback) {
+function myFind(arr, callback) {
     for (let i = 0; i < arr.length; i++) {
-        if (findNum === arr[i]) {
-            return callback(arr[i]);
+        if (callback(arr[i])) {
+            return arr[i];
         }
     }
 }
 
-myFind(array, 34, (item) => {
-    return item
+myFind(array, (item) => {
+    return item === 34
 })
 
-function myReduce(arr, startNum, callback) {
+function myReduce(arr, callback) {
+    let result = 0;
     for (let i = 0; i < arr.length; i++) {
-        startNum += arr[i];
+        result = callback(result, arr[i])
     }
-    return callback(startNum)
+    return result
 }
 
-myReduce(array, 0, (item) => {
-    return item;
+myReduce(array, (sum, item) => {
+    return sum + item;
 })
